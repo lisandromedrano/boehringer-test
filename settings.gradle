@@ -1,0 +1,2 @@
+include 'auth-api'
+include 'resource-server'

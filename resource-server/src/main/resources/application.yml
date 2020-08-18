@@ -1,0 +1,24 @@
+spring:
+  flyway:
+    enabled: true
+    locations: classpath:/db/migration
+    baseline-on-migrate: true
+  datasource:
+    url: "jdbc:postgresql://localhost:5433/boehringer"
+    username: boehringer
+    password: boehringer
+server:
+  port: 8081
+security:
+  oauth2:
+    client:
+      clientId: exampleClient
+      clientSecret: exampleSecret
+    resource:
+      token-info-uri: http://localhost:8080/oauth/check_token
+#logging:
+#  level:
+#    root: DEBUG
+#    org:
+#      springframework:
+#        web: DEBUG

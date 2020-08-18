@@ -1,0 +1,65 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.5.RELEASE'
+    }
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url 'http://repo.spring.io/milestone' }
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.boehrigner'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+bootJar {
+    baseName = 'ms-oauth2-rest'
+    version = '0.0.1'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/libs-milestone" }
+    maven { url "https://maven.atlassian.com/3rdparty" }
+    maven { url "https://repo.spring.io/milestone" }
+}
+
+ext {
+    springCloudVersion = 'Greenwich.M3'
+}
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-security')
+    implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
+    implementation('org.springframework.cloud:spring-cloud-starter-oauth2')
+    implementation('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.1.RELEASE')
+    implementation('org.springframework.security.oauth:spring-security-oauth-parent:2.3.5.RELEASE')
+    implementation('org.springframework.security.oauth:spring-security-oauth:2.3.3.RELEASE')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('org.springframework.security:spring-security-test')
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+bootRun {
+    jvmArgs = ["-Djava.security.egd=file:/dev/./urandom", "-Dspring.profiles.active=local"]
+}
