@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableJpaRepositories
 @EnableAutoConfiguration
-//@ComponentScan("com.boehringer.resourceserver.model")
 public class ResourceServerApplication {
 
 	public static void main(String[] args) {

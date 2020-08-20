@@ -7,6 +7,11 @@ spring:
     url: "jdbc:postgresql://postgres:5432/boehringer"
     username: boehringer
     password: boehringer
+  jpa:
+    properties:
+      hibernate:
+        generate_statistics: true
+
 server:
   port: 8081
 security:
