@@ -12,6 +12,7 @@ buildscript {
     }
 
     dependencies {
+        classpath ("gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.22.1")
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
@@ -62,4 +63,15 @@ dependencyManagement {
 
 bootRun {
     jvmArgs = ["-Djava.security.egd=file:/dev/./urandom", "-Dspring.profiles.active=local"]
+}
+
+// docker: plugin apply  
+apply plugin: 'com.palantir.docker'
+
+// docker: new task docker 
+docker {
+    dependsOn build
+    name "${project.name}"
+    files bootJar.archivePath
+    buildArgs(['JAR_FILE': "${bootJar.archiveName}"])
 }

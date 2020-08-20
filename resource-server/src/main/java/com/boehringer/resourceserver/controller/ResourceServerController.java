@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ResourceServerController {
 
-
     @Autowired
     private CustomersRepository customersRepository;
     @Autowired
@@ -30,7 +29,6 @@ public class ResourceServerController {
 
     @RequestMapping(value = "/customers/{id}", method = RequestMethod.GET, produces = {"application/json"})
     public Customer getCustomer(@PathVariable Integer id, Pageable pageable) {
-        String user = getUser();
         return customersRepository.findById(id).orElse(null);
     }
 
